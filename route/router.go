@@ -15,6 +15,7 @@ func InitRouter() *gin.Engine {
 	r := gin.New()
 	r.Static(core.Config.FileRequestPath, "storage")
 	r.Use(
+		middlewares.RateLimiterHandler(),
 		middlewares.CorsHandler(),
 		middlewares.LocaleHandler(),
 		gin.Logger(),

@@ -8,20 +8,22 @@ import (
 var Config = initConfig(".")
 
 type envConfig struct {
-	AppName                string   `mapstructure:"APP_NAME"`        // 项目名称
-	JwtKey                 string   `mapstructure:"JWT_KEY"`         // JWT密钥
-	JwtTTl                 int      `mapstructure:"JWT_TTL"`         // Jwt Token有效时长, 单位: 分钟
-	JwtRenewTTl            int      `mapstructure:"JWT_RENEW_TTL"`   // Jwt Token续期时长, 单位: 分钟
-	GinMode                string   `mapstructure:"GIN_MODE"`        // 模式
-	ServerPort             string   `mapstructure:"SERVER_PORT"`     // 服务端口
-	DBDSN                  string   `mapstructure:"DB_DSN"`          // DB数据源名
-	RedisPrefix            string   `mapstructure:"REDIS_PREDIX"`    // Redis前缀
-	RedisUrl               string   `mapstructure:"REDIS_URL"`       // Redis连接字符串
-	LogPath                string   `mapstructure:"LOG_PATH"`        // 日志文件保存目录
-	LogMaxSize             int      `mapstructure:"LOG_MAX_SIZE"`    // 在进行切割之前, 日志文件的最大大小, 单位: MB
-	LogMaxBackups          int      `mapstructure:"LOG_MAX_BACKUPS"` // 保留旧文件的最大个数
-	LogMaxAge              int      `mapstructure:"LOG_MAX_AGE"`     // 保留旧文件的最大天数
-	LogCompress            bool     `mapstructure:"LOG_COMPRESS"`    // 是否压缩/归档旧文件
+	AppName                string   `mapstructure:"APP_NAME"`              // 项目名称
+	JwtKey                 string   `mapstructure:"JWT_KEY"`               // JWT密钥
+	JwtTTl                 int      `mapstructure:"JWT_TTL"`               // Jwt Token有效时长, 单位: 分钟
+	JwtRenewTTl            int      `mapstructure:"JWT_RENEW_TTL"`         // Jwt Token续期时长, 单位: 分钟
+	GinMode                string   `mapstructure:"GIN_MODE"`              // 模式
+	ServerPort             string   `mapstructure:"SERVER_PORT"`           // 服务端口
+	DBDSN                  string   `mapstructure:"DB_DSN"`                // DB数据源名
+	RedisPrefix            string   `mapstructure:"REDIS_PREDIX"`          // Redis前缀
+	RedisUrl               string   `mapstructure:"REDIS_URL"`             // Redis连接字符串
+	LogPath                string   `mapstructure:"LOG_PATH"`              // 日志文件保存目录
+	LogMaxSize             int      `mapstructure:"LOG_MAX_SIZE"`          // 在进行切割之前, 日志文件的最大大小, 单位: MB
+	LogMaxBackups          int      `mapstructure:"LOG_MAX_BACKUPS"`       // 保留旧文件的最大个数
+	LogMaxAge              int      `mapstructure:"LOG_MAX_AGE"`           // 保留旧文件的最大天数
+	LogCompress            bool     `mapstructure:"LOG_COMPRESS"`          // 是否压缩/归档旧文件
+	RateLimiterCapacity    int64    `mapstructure:"RATE_LIMITER_CAPACITY"` // 限流最大令牌数
+	RateLimiterQuantum     int64    `mapstructure:"RATE_LIMITER_QUANTUM"`  // 限流每秒补充令牌数
 	DBMaxIdleConns         int      // 数据库空闲连接池最大值
 	DBMaxOpenConns         int      // 数据库连接池最大值
 	DBConnMaxLifetimeHours int16    // 连接可复用的最大时间(小时)

@@ -47,3 +47,4 @@ RoleNotExists: Role does not exist
 PasswordInvalid: Invalid password, need 6~32 bits, support uppercase and lowercase letters, numbers, ~!@#$%&*, need to include more than 2 types
 RoleIDIsRequired: Role ID cannot be empty
 AbnormalLogin: The account number has been logged in to other devices. If it is not operated by yourself, please change the password in time
+TooManyRequest: Too many request

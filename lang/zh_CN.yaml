@@ -48,3 +48,4 @@ RoleNotExists: 角色不存在
 PasswordInvalid: 密码无效，需6~32位，支持大小写字母、数字、~!@#$%&*，需包含2种类型以上
 RoleIDIsRequired: 角色ID不能为空
 AbnormalLogin: 账号已在其他设备登录，如非本人操作，请及时修改密码
+TooManyRequest: 请求太多

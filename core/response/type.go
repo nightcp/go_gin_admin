@@ -4,6 +4,7 @@ const (
 	HttpStatusOk      = 200 // 成功
 	HttpUnauthorized  = 401 // 未登录
 	HttpAbnormalLogin = 402 // 异常登录
+	HttpForbidden     = 403 // 拒绝访问
 	HttpServerError   = 500 // 系统错误
 )
 
