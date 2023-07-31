@@ -18,7 +18,7 @@ func ErrorHandler(c *gin.Context) {
 				c.JSON(response.HttpServerError, response.Resp{
 					Code:   response.HttpServerError,
 					Status: false,
-					Msg:    core.Lang.GetMassage(c, "SystemError"),
+					Msg:    core.Lang.GetMassage(c, "ServerError"),
 				})
 				c.Abort()
 			}

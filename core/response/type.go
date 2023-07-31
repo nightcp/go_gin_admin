@@ -1,8 +1,10 @@
 package response
 
 const (
-	HttpStatusOk    = 200 // 成功
-	HttpServerError = 500 // 系统错误
+	HttpStatusOk      = 200 // 成功
+	HttpUnauthorized  = 401 // 未登录
+	HttpAbnormalLogin = 402 // 异常登录
+	HttpServerError   = 500 // 系统错误
 )
 
 // Resp 统一返回格式
