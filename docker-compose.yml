@@ -1,0 +1,63 @@
+version: "3.5"
+
+services:
+  golang:
+    container_name: "${APP_NAME}-golang-${APP_ID}"
+    image: golang:1.19
+    environment:
+      GO111MODULE: "on"
+      GOPATH: "/go"
+      GOPROXY: ${GO_PROXY}
+      TZ: ${APP_TZ}
+    working_dir: /usr/src
+    ports:
+      - "${APP_PORT}:${SERVER_PORT}"
+    volumes:
+      - ./:/usr/src
+      - ./storage/cache/mod:/go/pkg/mod/cache
+      - ./bin:/go/bin
+    restart: always
+    tty: true
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      network:
+        ipv4_address: ${APP_ADDR}.2
+  postgres:
+    container_name: "${APP_NAME}-postgres-${APP_ID}"
+    image: postgres:15
+    environment:
+      TZ: ${APP_TZ}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${DB_DATABASE}
+    volumes:
+      - ./docker/postgresql/data:/var/lib/postgresql/data
+      - ./docker/postgresql/sh:/tmp/sh
+    ports:
+      - "15432:5432"
+    restart: always
+    networks:
+      network:
+        ipv4_address: ${APP_ADDR}.3
+  redis:
+    container_name: "${APP_NAME}-redis-${APP_ID}"
+    image: redis:7.0-alpine
+    environment:
+      TZ: ${APP_TZ}
+    volumes:
+      - ./docker/redis/data:/data
+    command: "--requirepass ${REDIS_PASS}"
+    restart: always
+    networks:
+      network:
+        ipv4_address: ${APP_ADDR}.4
+
+networks:
+  network:
+    name: "${APP_NAME}-network-${APP_ID}"
+    ipam:
+      config:
+        - subnet: ${APP_ADDR}.0/24
+          gateway: ${APP_ADDR}.1

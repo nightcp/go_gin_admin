@@ -1,0 +1,114 @@
+basePath: /api/admin
+definitions:
+  req.AdminLoginReq:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  resp.AdminLoginResp:
+    properties:
+      token:
+        description: 访问令牌
+        type: string
+    type: object
+  resp.AdminProfileResp:
+    properties:
+      avatar:
+        description: 头像
+        type: string
+      nickname:
+        description: 昵称
+        type: string
+      username:
+        description: 用户名
+        type: string
+    type: object
+  response.Resp:
+    properties:
+      code:
+        description: 状态码
+        type: integer
+      data:
+        description: 数据
+      msg:
+        description: 消息
+        type: string
+      status:
+        description: 状态
+        type: boolean
+    type: object
+externalDocs:
+  description: OpenAPI
+  url: https://swagger.io/resources/open-api/
+host: 127.0.0.1:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server celler server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Swagger Admin API
+  version: "1.0"
+paths:
+  /admin/auth/login:
+    post:
+      consumes:
+      - application/json
+      description: 获取访问令牌
+      parameters:
+      - description: 登录参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/req.AdminLoginReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Resp'
+            - properties:
+                data:
+                  $ref: '#/definitions/resp.AdminLoginResp'
+              type: object
+      summary: 用户登录
+      tags:
+      - 认证
+  /admin/auth/profile:
+    get:
+      description: 获取当前用户数据
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Resp'
+            - properties:
+                data:
+                  $ref: '#/definitions/resp.AdminProfileResp'
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 用户详情
+      tags:
+      - 认证
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

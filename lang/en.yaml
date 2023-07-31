@@ -1,0 +1,49 @@
+SystemError: System Error
+ParameterError: Parameter error
+Unauthorized: Unauthorized
+Succeeded: Succeeded
+Failed: Failed
+UsernameIsRequired: Username cannot be empty
+UsernameLongerThanMax: User name up to %d characters
+PasswordIsRequired: Password cannot be empty
+PasswordLongerThanMax: Password up to %d characters
+UsernameOrPasswordIsIncorrect: Incorrect user name or password
+LoginSucceeded: Login succeeded
+LoginFailed: Login failed
+UserNotExists: User does not exist
+FailedToUploadFile: Failed to upload file
+InvalidFileType: Only files of type [%s] are allowed
+InvalidFileSize: File size up to %dM
+UploadFileSuccessfully: Upload file successfully
+EditSucceeded: Modification succeeded
+EditFailed: Modification failed
+NicknameIsRequired: Nickname cannot be empty
+NicknameLongerThanMax: Nickname up to %d characters
+AvatarIsRequired: Please upload your avatar
+AvatarLongerThanMax: Avatar up to %d characters
+FileDoesNotExist: File does not exist
+OldPasswordIsRequired: Old password cannot be empty
+OldPasswordLongerThanMax: Old password up to %d characters
+OldPasswordInvalid: Incorrect old password
+NewPasswordIsRequired: New password cannot be empty
+NewPasswordInvalid: The new password is invalid. It needs 6~32 characters. It supports upper and lower case letters, numbers, ~!@#$%&*, need to include more than 2 types
+ConfirmPasswordIsRequired: Confirm password cannot be empty
+ConfirmPasswordLongerThanMax: Confirm password up to %d characters
+ConfirmPasswordEqNewPassword: Confirm password does not match new password
+PageNoIsRequired: Page number cannot be empty
+PageNoIsNumber: Page number must be a number
+PageNoMinimum: Minimum page number is %d
+PageSizeIsRequired: Records per page cannot be empty
+PageSizeIsNumber: Number of records per page must be a number
+PageSizeMinimum: Records per page minimum %d, maximum %d
+AddSucceeded: Added successfully
+AddFailed: Failed to add
+DeleteSucceeded: Deleted successfully
+DeleteFailed: Delete failed
+RoleNameIsRequired: Role name cannot be empty
+RoleNameLongerThanMax: Role name up to %d characters
+RoleNameIsExists: Role name already exists
+RoleNotExists: Role does not exist
+PasswordInvalid: Invalid password, need 6~32 bits, support uppercase and lowercase letters, numbers, ~!@#$%&*, need to include more than 2 types
+RoleIDIsRequired: Role ID cannot be empty
+RemoteLogin: The account number has been logged in to other devices. If it is not operated by yourself, please change the password in time

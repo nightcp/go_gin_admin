@@ -1,0 +1,50 @@
+SystemError: 系統錯誤
+ParameterError: 參數錯誤
+Unauthorized: 未登錄
+Succeeded: 成功
+Failed: 失敗
+UsernameIsRequired: 用戶名不能為空
+UsernameLongerThanMax: 用戶名最多%d個字符
+PasswordIsRequired: 密碼不能為空
+PasswordLongerThanMax: 密碼最多%d個字符
+UsernameOrPasswordIsIncorrect: 用戶名或密碼錯誤
+LoginSucceeded: 登錄成功
+LoginFailed: 登錄失敗
+UserNotExists: 用戶不存在
+FailedToUploadFile: 上傳文件失敗
+InvalidFileType: 只允許上傳[%s]類型的文件
+InvalidFileSize: 文件大小最多%dM
+UploadFileSuccessfully: 上傳文件成功
+EditSucceeded: 修改成功
+EditFailed: 修改失敗
+NicknameIsRequired: 暱稱不能為空
+NicknameLongerThanMax: 暱稱最多%d個字符
+AvatarIsRequired: 請上傳頭像
+AvatarLongerThanMax: 頭像最多%d個字符
+FileDoesNotExist: 文件不存在
+OldPasswordIsRequired: 舊密碼不能為空
+OldPasswordLongerThanMax: 舊密碼最多%d個字符
+OldPasswordInvalid: 舊密碼不正確
+NewPasswordIsRequired: 新密碼不能為空
+NewPasswordInvalid: 新密碼無效,需6~ 32位,支持大小寫字母、數字、~!@#$%&*,需包含2種類型以上
+ConfirmPasswordIsRequired: 確認密碼不能為空
+ConfirmPasswordLongerThanMax: 確認密碼最多%d個字符
+ConfirmPasswordEqNewPassword: 確認密碼與新密碼不一致
+PageNoIsRequired: 頁碼不能為空
+PageNoIsNumber: 頁碼必須是數字
+PageNoMinimum: 頁碼最小為%d
+PageSizeIsRequired: 每頁記錄數不能為空
+PageSizeIsNumber: 每頁記錄數必須是數字
+PageSizeMinimum: 每頁記錄數最小為%d, 最大為%d
+PageSizeMaximum: 每頁記錄數最小為%d, 最大為%d
+AddSucceeded: 添加成功
+AddFailed: 添加失敗
+DeleteSucceeded: 刪除成功
+DeleteFailed: 刪除失敗
+RoleNameIsRequired: 角色名稱不能為空
+RoleNameLongerThanMax: 角色名稱最多%d個字符
+RoleNameIsExists: 角色名稱已存在
+RoleNotExists: 角色不存在
+PasswordInvalid: 密碼無效,需6~ 32位,支持大小寫字母、數字、~!@#$%&*,需包含2種類型以上
+RoleIDIsRequired: 角色ID不能為空
+RemoteLogin: 賬號已在其他設備登錄,如非本人操作,請及時修改密碼

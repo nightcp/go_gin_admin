@@ -1,0 +1,6 @@
+/.idea
+/docker/postgresql/data
+/tmp
+.env
+/bin/air
+/test

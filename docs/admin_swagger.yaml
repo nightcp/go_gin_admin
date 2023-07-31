@@ -1,0 +1,573 @@
+basePath: /api/admin
+definitions:
+  req.AddAdminRoleReq:
+    properties:
+      role_name:
+        description: 角色名称
+        maxLength: 32
+        type: string
+    required:
+    - role_name
+    type: object
+  req.AddAdminUserReq:
+    properties:
+      avatar:
+        description: 头像
+        maxLength: 150
+        type: string
+      nickname:
+        description: 昵称
+        maxLength: 32
+        type: string
+      password:
+        description: 密码
+        type: string
+      role_id:
+        description: 角色ID
+        type: integer
+      username:
+        description: 用户名
+        maxLength: 32
+        type: string
+    required:
+    - nickname
+    - password
+    - role_id
+    - username
+    type: object
+  req.EditAdminRoleReq:
+    properties:
+      role_name:
+        description: 角色名称
+        maxLength: 32
+        type: string
+    required:
+    - role_name
+    type: object
+  req.EditAdminUserReq:
+    properties:
+      avatar:
+        description: 头像
+        maxLength: 150
+        type: string
+      confirm_password:
+        description: 确认密码
+        maxLength: 32
+        type: string
+      new_password:
+        description: 新密码
+        type: string
+      nickname:
+        description: 昵称
+        maxLength: 32
+        type: string
+      role_id:
+        description: 角色ID
+        type: integer
+    required:
+    - avatar
+    - nickname
+    - role_id
+    type: object
+  req.EditPasswordReq:
+    properties:
+      confirm_password:
+        description: 确认密码
+        maxLength: 32
+        type: string
+      new_password:
+        description: 新密码
+        type: string
+      old_password:
+        description: 旧密码
+        maxLength: 32
+        type: string
+    required:
+    - confirm_password
+    - new_password
+    - old_password
+    type: object
+  req.EditProfileReq:
+    properties:
+      avatar:
+        description: 头像
+        maxLength: 150
+        type: string
+      nickname:
+        description: 昵称
+        maxLength: 15
+        type: string
+    required:
+    - avatar
+    - nickname
+    type: object
+  req.LoginReq:
+    properties:
+      password:
+        description: 密码
+        maxLength: 32
+        type: string
+      username:
+        description: 用户名
+        maxLength: 32
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  resp.AdminRoleListResp:
+    properties:
+      created_at:
+        description: 创建时间
+        type: string
+      id:
+        description: 角色ID
+        type: integer
+      name:
+        description: 角色名称
+        type: string
+    type: object
+  resp.AdminUserListResp:
+    properties:
+      avatar:
+        description: 头像
+        type: string
+      created_at:
+        description: 创建时间
+        type: string
+      id:
+        description: 用户ID
+        type: integer
+      nickname:
+        description: 昵称
+        type: string
+      role:
+        allOf:
+        - $ref: '#/definitions/resp.AdminUserRoleResp'
+        description: 角色
+      username:
+        description: 用户名
+        type: string
+    type: object
+  resp.AdminUserRoleResp:
+    properties:
+      id:
+        description: 角色ID
+        type: integer
+      name:
+        description: 角色名称
+        type: string
+    type: object
+  resp.LoginResp:
+    properties:
+      token:
+        description: 访问令牌
+        type: string
+    type: object
+  resp.ProfileResp:
+    properties:
+      avatar:
+        description: 头像
+        type: string
+      nickname:
+        description: 昵称
+        type: string
+      username:
+        description: 用户名
+        type: string
+    type: object
+  resp.UploadFileResp:
+    properties:
+      path:
+        description: 文件路径
+        type: string
+    type: object
+  response.PageResp:
+    properties:
+      count:
+        description: 总数
+        type: integer
+      list:
+        description: 列表
+      page_no:
+        description: 当前页
+        type: integer
+      page_size:
+        description: 每页记录数
+        type: integer
+    type: object
+  response.Resp:
+    properties:
+      code:
+        description: 状态码
+        type: integer
+      data:
+        description: 数据
+      msg:
+        description: 消息
+        type: string
+      status:
+        description: 状态
+        type: boolean
+    type: object
+externalDocs:
+  description: OpenAPI
+  url: https://swagger.io/resources/open-api/
+host: 127.0.0.1:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server celler server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Admin API
+  version: "1.0"
+paths:
+  /admin-roles:
+    get:
+      description: 分页获取角色列表
+      parameters:
+      - description: 页码, 最小为1
+        in: query
+        name: page_no
+        required: true
+        type: integer
+      - description: 每页记录数, 最小为10, 最大为1000
+        in: query
+        name: page_size
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Resp'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/response.PageResp'
+                  - properties:
+                      list:
+                        items:
+                          $ref: '#/definitions/resp.AdminRoleListResp'
+                        type: array
+                    type: object
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 角色列表
+      tags:
+      - 角色
+    post:
+      consumes:
+      - application/json
+      description: 新增角色
+      parameters:
+      - description: 新增角色参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/req.AddAdminRoleReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Resp'
+      security:
+      - ApiKeyAuth: []
+      summary: 新增角色
+      tags:
+      - 角色
+  /admin-roles/{id}:
+    delete:
+      description: 删除角色
+      parameters:
+      - description: 角色ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Resp'
+      security:
+      - ApiKeyAuth: []
+      summary: 删除角色
+      tags:
+      - 角色
+    put:
+      consumes:
+      - application/json
+      description: 编辑角色
+      parameters:
+      - description: 角色ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 编辑角色参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/req.EditAdminRoleReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Resp'
+      security:
+      - ApiKeyAuth: []
+      summary: 编辑角色
+      tags:
+      - 角色
+  /admin-users:
+    get:
+      description: 分页获取用户列表
+      parameters:
+      - description: 页码, 最小为1
+        in: query
+        name: page_no
+        required: true
+        type: integer
+      - description: 每页记录数, 最小为10, 最大为1000
+        in: query
+        name: page_size
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Resp'
+            - properties:
+                data:
+                  allOf:
+                  - $ref: '#/definitions/response.PageResp'
+                  - properties:
+                      list:
+                        $ref: '#/definitions/resp.AdminUserListResp'
+                    type: object
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 用户列表
+      tags:
+      - 用户
+    post:
+      consumes:
+      - application/json
+      description: 新增用户
+      parameters:
+      - description: 新增用户参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/req.AddAdminUserReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Resp'
+      security:
+      - ApiKeyAuth: []
+      summary: 新增用户
+      tags:
+      - 用户
+  /admin-users/{id}:
+    delete:
+      description: admin用户不可删除
+      parameters:
+      - description: 用户ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Resp'
+      security:
+      - ApiKeyAuth: []
+      summary: 删除用户
+      tags:
+      - 用户
+    put:
+      consumes:
+      - application/json
+      description: 编辑用户
+      parameters:
+      - description: 用户ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 编辑用户参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/req.EditAdminUserReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Resp'
+      security:
+      - ApiKeyAuth: []
+      summary: 编辑用户
+      tags:
+      - 用户
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: 获取访问令牌
+      parameters:
+      - description: 登录参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/req.LoginReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Resp'
+            - properties:
+                data:
+                  $ref: '#/definitions/resp.LoginResp'
+              type: object
+      summary: 用户登录
+      tags:
+      - 认证
+  /auth/password:
+    put:
+      consumes:
+      - application/json
+      description: 设置新密码, 之后使用新密码登录
+      parameters:
+      - description: 修改用户密码参数
+        in: body
+        name: date
+        required: true
+        schema:
+          $ref: '#/definitions/req.EditPasswordReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Resp'
+      security:
+      - ApiKeyAuth: []
+      summary: 修改用户密码
+      tags:
+      - 认证
+  /auth/profile:
+    get:
+      description: 获取当前用户数据
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Resp'
+            - properties:
+                data:
+                  $ref: '#/definitions/resp.ProfileResp'
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 用户信息
+      tags:
+      - 认证
+    put:
+      consumes:
+      - application/json
+      description: 修改用户昵称, 头像
+      parameters:
+      - description: 修改用户信息参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/req.EditProfileReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Resp'
+      security:
+      - ApiKeyAuth: []
+      summary: 修改用户信息
+      tags:
+      - 认证
+  /publish/upload:
+    post:
+      description: 上传文件并获取文件路径
+      parameters:
+      - description: 文件参数
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Resp'
+            - properties:
+                data:
+                  $ref: '#/definitions/resp.UploadFileResp'
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 上传文件
+      tags:
+      - 公共
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
