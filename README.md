@@ -11,6 +11,7 @@ cd admin        # 进入项目目录
 
 项目地址为：**`http://ip:port`**（`port`默认为`8080`）。
 
+#### 2、可用命令
 ```shell
 ./cmd init          # 首次安装
 ./cmd update        # 更新程序
@@ -18,4 +19,5 @@ cd admin        # 进入项目目录
 ./cmd prod          # 生成模式
 ./cmd repassword    # 重置admin密码
 ./cmd docs admin    # 生成API文档, http://ip:port/swagger/admin/index.html
+./cmd go "command"  # 在golang容器中执行命令
 ```

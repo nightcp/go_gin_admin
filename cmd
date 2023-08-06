@@ -169,6 +169,10 @@ if [ $# -gt 0 ]; then
     elif [[ "$1" == "repassword" ]]; then
         shift 1
         run_exec "postgres" "-it" "sh /tmp/sh/repassword.sh \"$@\""
+    elif [[ "$1" == "go" ]]; then
+        shift 1
+        e="go $*"
+        run_exec "golang" "-it" "$e"
     else
         $COMPOSE "$@"
     fi
